@@ -1,0 +1,39 @@
+.header {
+    height: 69px;
+    background-color: #3662D1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__title {
+        margin-block: 0;
+        color: white;
+        padding: 8px;
+    }
+
+    &__actions {
+        display: flex;
+        padding: 8px;
+        &-notifications, &-add {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &__actions-notifications-label {
+        color: white;
+    }
+
+    &__actions-add-label {
+        color: white;
+        text-align: center;
+    }
+}
+
+.add-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

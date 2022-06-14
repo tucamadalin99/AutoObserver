@@ -1,0 +1,12 @@
+.login-form {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    &__control {
+        margin-top: 16px;
+    }
+
+    .MuiButton-root,.MuiFormControl-root {
+        margin-top: 16px;
+    }
+}
