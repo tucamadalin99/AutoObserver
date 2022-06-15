@@ -1,5 +1,5 @@
 # AutoObserver
-Reminder app for expiring car papers (Rovignette, ITP, Assurance)
+Reminder app for expiring car papers (Rovignette, ITP, Assurance).
 The app is a Progressive Web App and can be installed on devices.
 
 ![image](https://user-images.githubusercontent.com/50795013/173881556-dd96ec31-78f4-40f2-9f69-e41e5831ba51.png)
