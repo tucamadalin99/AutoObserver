@@ -1,5 +1,6 @@
-import firebase from 'firebase/app';
-import 'firebase/database';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/database';
+import {getMessaging, getToken, onMessage} from 'firebase/messaging';
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -12,12 +13,38 @@ const config = {
   measurementId: "G-FJERQXLFC5"
 };
 
-export function initFirebase() {
-  if (!firebase.apps.length) {
-    firebase.initializeApp(config);
-  }
-};
+const app = firebase.initializeApp(config);
+const messaging = getMessaging(app);
 
-initFirebase();
+export function initFirebaseMessaging() {
+  Notification.requestPermission().then((permission) => {
+    console.log("Notifications accepted!", permission);
+    
+      getToken(messaging, { vapidKey: process.env.REACT_APP_VAPID_KEY }).then((currentToken) => {
+        if (currentToken) {
+          // Send the token to your server and update the UI if necessary
+          // ...
+            console.log(currentToken, 'token');
+        } else {
+          // Show permission request UI
+          console.log('No registration token available. Request permission to generate one.');
+          // ...
+        }
+        }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+        // ...
+        });
+      }).then(token => console.log(token))
+      .catch(err => console.log('Error: ' + err));
+}
+
+export const onMessageListener = () => {
+  new Promise((resolve) => {
+    onMessage(messaging, (payload) => {
+      console.log('payload', payload);
+      resolve(payload);
+     });
+  });
+}
 
 export { firebase };

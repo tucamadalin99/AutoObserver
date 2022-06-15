@@ -12,8 +12,11 @@
     }
 
     &__actions {
+        width: 100%;
         display: flex;
         padding: 8px;
+        justify-content: center;
+        gap: 32px;
         &-notifications, &-add {
             display: flex;
             flex-direction: column;

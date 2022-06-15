@@ -14,8 +14,10 @@ import { DatePicker } from '@mui/lab';
 import { useState } from 'react';
 import { TextField } from '@mui/material';
 import Alert from '@mui/material/Alert';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import ConstructionIcon from '@mui/icons-material/Construction';
+import AddRoadIcon from '@mui/icons-material/AddRoad';
 import dateFormat from '../utils';
-import { askForPermissionToReceiveNotifications } from '../initFirebase';
 
 const style = {
   position: 'absolute',
@@ -30,7 +32,6 @@ const style = {
 };
 
 export default function Header(props) {
-    const [hasNotifications, setNotifications] = useState(false);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [license, setLicense] = useState('');
@@ -45,8 +46,8 @@ export default function Header(props) {
         setType(event.target.value);
     };
 
-    const handleNotifications = () => {
-        setNotifications(!hasNotifications);
+    const handleCategorySelection = (selection) => {
+        props.onSelectCategory(selection);
     }
 
     const resetFormInputs = () => {
@@ -77,11 +78,24 @@ export default function Header(props) {
 
     return (
         <div className="header">
-            <h3 className="header__title">auto-observer</h3>
             <div className="header__actions">
-                <div className="header__actions-notifications">
-                    <span className='header__actions-notifications-label'>Notify</span>
-                    <Switch defaultChecked color='default' onChange={handleNotifications} />
+                <div className="header__actions-add">
+                    <span className="header__actions-add-label">Roviniete</span>
+                      <IconButton onClick={() => handleCategorySelection('Rovinieta')} aria-label="add entry" component="span">
+                        <AddRoadIcon />
+                      </IconButton>
+                </div>
+                <div className="header__actions-add">
+                    <span className="header__actions-add-label">Asigurari</span>
+                      <IconButton onClick={() => handleCategorySelection('Asigurare')} aria-label="add entry" component="span">
+                        <ReceiptIcon />
+                      </IconButton>
+                </div>
+                <div className="header__actions-add">
+                    <span className="header__actions-add-label">ITP</span>
+                      <IconButton onClick={() => handleCategorySelection('Inspectie')} aria-label="add entry" component="span">
+                        <ConstructionIcon />
+                      </IconButton>
                 </div>
                 <div className="header__actions-add">
                     <span className="header__actions-add-label">Add</span>
